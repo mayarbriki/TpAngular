@@ -1,0 +1,44 @@
+<div class="fournisseurs-container">
+    <h2>Liste des Fournisseurs</h2>
+  
+    <!-- Table displaying suppliers -->
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Code</th>
+          <th>Libellé</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let fournisseur of fournisseurs">
+          <td>{{ fournisseur.idFournisseur }}</td>
+          <td>
+            <span [ngStyle]="{ 'font-weight': getColor(fournisseur.code) }">
+              {{ fournisseur.code }}
+            </span>
+          </td>
+          <td [ngStyle]="{ 'background-color': fournisseur.libelle === 'hp' ? 'green' : 'yellow' }">
+            {{ fournisseur.libelle }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <!-- List of suppliers with conditions on ID and background color -->
+    <div *ngFor="let fournisseur of fournisseurs ; let i =index " >
+      <fieldset *ngIf="fournisseur.idFournisseur >= 100"
+        [ngStyle]="{ 'background-color': fournisseur.libelle === 'hp' ? 'green' : 'yellow' }"
+        (dblclick)="deleteFournisseur(i)">
+        <legend>Fournisseur:{{fournisseur.idFournisseur}}</legend>
+        
+        Code: 
+        <span [ngStyle]="{ 'font-weight': getColor(fournisseur.code) }">
+          {{ fournisseur.code }}
+        </span><br>
+        Libellé: {{ fournisseur.libelle }}
+      </fieldset>
+      
+    </div>
+  </div>
+  
